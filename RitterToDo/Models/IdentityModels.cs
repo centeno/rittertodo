@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace RitterToDo.Models
 {
@@ -7,7 +8,7 @@ namespace RitterToDo.Models
     {
     }
 
-    public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public partial class ApplicationDbContext : RitterToDo.Models.IApplicationDbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection")

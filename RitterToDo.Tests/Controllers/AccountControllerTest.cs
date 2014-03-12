@@ -23,9 +23,7 @@ namespace RitterToDo.Tests.Controllers
     {
         private AccountController CreateSUT()
         {
-            var sut = new AccountController(
-                A.Fake<UserManager<ApplicationUser>>(),
-                A.Fake<IAuthenticationManager>());
+            var sut = new AccountController(A.Fake<UserManager<ApplicationUser>>());
             return sut;
         }
 
@@ -61,6 +59,7 @@ namespace RitterToDo.Tests.Controllers
         public async Task Login_ValidUser_RedirectsToUrl()
         {
             var sut = CreateSUT();
+            sut.AuthenticationManager = A.Fake<IAuthenticationManager>();
             var url = @"http://www.uniritter.com.br";
             var fixture = new Fixture();
             var lvm = fixture.Create<LoginViewModel>();

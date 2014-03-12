@@ -1,6 +1,8 @@
-﻿using System;
+﻿using RitterToDo.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -18,6 +20,7 @@ namespace RitterToDo
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders[typeof(IPrincipal)] = new IPrincipalModelBinder();
         }
     }
 }
