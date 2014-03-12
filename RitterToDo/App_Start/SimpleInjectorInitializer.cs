@@ -12,6 +12,7 @@ namespace RitterToDo.App_Start
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using RitterToDo.Models;
+    using Microsoft.Owin.Security;
     
     public static class SimpleInjectorInitializer
     {
@@ -34,6 +35,8 @@ namespace RitterToDo.App_Start
         {
             container.Register<UserManager<ApplicationUser>>(
                 () => (new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()))));
+            container.Register<IAuthenticationManager>(
+                () => (IAuthenticationManager)null);
         }
     }
 }

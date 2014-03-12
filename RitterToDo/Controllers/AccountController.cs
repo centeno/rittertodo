@@ -15,9 +15,10 @@ namespace RitterToDo.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, IAuthenticationManager authManager)
         {
             UserManager = userManager;
+            AuthenticationManager = authManager?? HttpContext.GetOwinContext().Authentication;
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -318,13 +319,7 @@ namespace RitterToDo.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        public IAuthenticationManager AuthenticationManager { get; private set; }
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
