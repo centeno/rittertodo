@@ -21,6 +21,7 @@ namespace RitterToDo
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders[typeof(IPrincipal)] = new IPrincipalModelBinder();
+            MappingConfig.RegisterMappings();
         }
     }
 }
