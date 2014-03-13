@@ -11,10 +11,6 @@ namespace RitterToDo.App_Start
     {
         public static void RegisterMappings()
         {
-            MappingRepository.Default
-                .AddMapping<ToDo, ToDoViewModel>()
-                    .From(p => p.DueDate ?? DateTime.Now)
-                    .To(p => p.DueDate);
         }
     }
 }

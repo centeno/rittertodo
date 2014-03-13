@@ -16,7 +16,7 @@ namespace RitterToDo.Repos
             this.DbContext = dbContext;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             var userId = IdHelper.GetUserId();
 
