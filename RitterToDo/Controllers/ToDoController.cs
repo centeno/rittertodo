@@ -20,9 +20,9 @@ namespace RitterToDo.Controllers
 		}
 		//
 		// GET: /ToDo/
-		public ActionResult Index(IPrincipal user)
+		public ActionResult Index()
 		{
-            var entities = ToDoRepo.GetAll(user);
+            var entities = ToDoRepo.GetAll();
 			return View(EntityMapper.MapMultiple(entities));
 		}
 

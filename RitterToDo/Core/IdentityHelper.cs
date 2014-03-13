@@ -9,9 +9,9 @@ namespace RitterToDo.Core
 {
     public class IdentityHelper : RitterToDo.Core.IIdentityHelper
     {
-        public string GetUserId(IPrincipal userPrincipal)
+        public string GetUserId()
         {
-            return userPrincipal.Identity.GetUserId();
+            return HttpContext.Current.User.Identity.GetUserId();
         }
     }
 }

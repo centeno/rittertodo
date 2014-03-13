@@ -10,18 +10,18 @@ namespace RitterToDo.Repos
 {
     public class BaseRepository<T> : IRepository<T> where T : class, IOwnedEntity
     {
-        public BaseRepository(IIdentityHelper idHelper)
+        public BaseRepository(IIdentityHelper idHelper, IApplicationDbContext dbContext)
         {
             this.IdHelper = idHelper;
-            this.DbContext = new ApplicationDbContext();
+            this.DbContext = dbContext;
         }
 
-        public IEnumerable<T> GetAll(IPrincipal user)
+        public IEnumerable<T> GetAll()
         {
-            var userId = IdHelper.GetUserId(user);
+            var userId = IdHelper.GetUserId();
 
             var q = from t in this.DbContext.GetEntitySet<T>()
-                    where t.Owner.Id == userId
+                    where t.OwnerId == userId
                     select t;
 
             return q;

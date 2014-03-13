@@ -10,8 +10,8 @@ namespace RitterToDo.Repos
 {
     public class ToDoRepository : BaseRepository<ToDo>
     {
-        public ToDoRepository(IIdentityHelper idHelper)
-            : base(idHelper)
+        public ToDoRepository(IIdentityHelper idHelper, IApplicationDbContext dbContext)
+            : base(idHelper, dbContext)
         {
         }
     }

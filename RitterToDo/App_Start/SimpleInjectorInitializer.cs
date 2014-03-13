@@ -27,7 +27,7 @@ namespace RitterToDo.App_Start
 
     public static class SimpleInjectorInitializer
     {
-        /// <summary>Initialize the container and register it as MVC3 Dependency Resolver.</summary>
+        /// <summary>Initialize the container and register it as MVC5 Dependency Resolver.</summary>
         public static void Initialize()
         {
             // Did you know the container can diagnose your configuration? Go to: https://bit.ly/YE8OJj.
@@ -53,6 +53,8 @@ namespace RitterToDo.App_Start
             container.Register<IIdentityHelper, IdentityHelper>();
 
             container.Register<IRepository<ToDo>, ToDoRepository>();
+            
+            container.Register<IApplicationDbContext, ApplicationDbContext>();
 
             container.ResolveUnregisteredType += (s, e) =>
             {

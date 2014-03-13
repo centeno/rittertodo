@@ -214,11 +214,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
+    <Compile Include="Core\DummyDataGenerator.cs" />
     <Compile Include="Core\IdentityHelper.cs" />
     <Compile Include="Core\IIdentityHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403130218051_Starter.cs" />
+    <Compile Include="Migrations\201403130218051_Starter.Designer.cs">
+      <DependentUpon>201403130218051_Starter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IApplicationDbContext.cs" />
@@ -296,6 +302,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403130218051_Starter.resx">
+      <DependentUpon>201403130218051_Starter.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

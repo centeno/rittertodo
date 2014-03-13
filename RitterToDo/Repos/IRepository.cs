@@ -7,6 +7,6 @@ namespace RitterToDo.Repos
 {
     public interface IRepository<T> where T : class, IOwnedEntity
     {
-        IEnumerable<T> GetAll(IPrincipal user);
+        IEnumerable<T> GetAll();
     }
 }
