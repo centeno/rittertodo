@@ -30,3 +30,5 @@ _ReSharper*/
 packages/
 *.mdf
 *.ldf
+# Adding nuget.exe, so AppHarbor can execute it properly
+!.nuget/NuGet.exe
