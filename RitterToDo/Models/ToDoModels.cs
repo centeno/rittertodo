@@ -25,8 +25,10 @@ namespace RitterToDo.Models
 
         public bool Done { get; set; }
 
+        [Required(ErrorMessage = "É necessário informar uma Categoria para o ToDo")]
         public ToDoCategory Category { get; set; }
 
+        [Required(ErrorMessage = "É necessário informar o Dono do ToDo")]
         public ApplicationUser Owner { get; set; }
 
         [ForeignKey("Category")]
