@@ -222,9 +222,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403130218051_Starter.cs" />
-    <Compile Include="Migrations\201403130218051_Starter.Designer.cs">
-      <DependentUpon>201403130218051_Starter.cs</DependentUpon>
+    <Compile Include="Migrations\201403301523432_Starter.cs" />
+    <Compile Include="Migrations\201403301523432_Starter.Designer.cs">
+      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -242,6 +242,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\RitterToDo.mdf" />
+    <Content Include="App_Data\RitterToDo_log.ldf">
+      <DependentUpon>RitterToDo.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -299,16 +303,13 @@
     <Content Include="Views\ToDo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201403301523432_Starter.resx">
+      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201403130218051_Starter.resx">
-      <DependentUpon>201403130218051_Starter.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
