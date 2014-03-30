@@ -56,6 +56,8 @@ namespace RitterToDo.App_Start
             
             container.Register<IApplicationDbContext, ApplicationDbContext>();
 
+            container.RegisterSingle(MappingRepository.Default);
+
             container.ResolveUnregisteredType += (s, e) =>
             {
                 Type type = e.UnregisteredServiceType;
