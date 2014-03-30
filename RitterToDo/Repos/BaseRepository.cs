@@ -30,5 +30,11 @@ namespace RitterToDo.Repos
         public IIdentityHelper IdHelper { get; private set; }
 
         public IApplicationDbContext DbContext { get; private set; }
+
+
+        public T GetById(Guid id)
+        {
+            return DbContext.GetById<T>(id);
+        }
     }
 }

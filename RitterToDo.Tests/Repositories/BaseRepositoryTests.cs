@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace RitterToDo.Tests.Repositories
 {
     [TestFixture(TypeArgs=new [] { typeof(ToDo) })]
-    public class BaseRepositoryTest<T> where T : class, IOwnedEntity
+    public class BaseRepositoryTests<T> where T : class, IOwnedEntity
     {
         private BaseRepository<T> CreateSUT()
         {
