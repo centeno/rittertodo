@@ -1,4 +1,5 @@
-﻿using RitterToDo.Repos;
+﻿using Moo.Extenders;
+using RitterToDo.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,32 +15,39 @@ namespace RitterToDo.Controllers
 	public class ToDoController : Controller
 	{
 		public ToDoController(
-            IRepository<ToDo> todoRepo, 
-            IMappingRepository mappingRepository)
+			IRepository<ToDo> todoRepo,
+			IRepository<ToDoCategory> todoCategoryRepo,
+			IMappingRepository mappingRepository)
 		{
-		    this.ToDoRepo = todoRepo;
-		    MappingRepository = mappingRepository;
+			ToDoRepo = todoRepo;
+			TodoCategoryRepo = todoCategoryRepo;
+			MappingRepository = mappingRepository;
 		}
 
-	    //
-		// GET: /ToDo/
 		public ActionResult Index()
 		{
-            var entities = ToDoRepo.GetAll();
-		    var mapper = MappingRepository.ResolveMapper<ToDo, ToDoViewModel>();
-		    var models = mapper.MapMultiple(entities);
+			var entities = ToDoRepo.GetAll();
+			var mapper = MappingRepository.ResolveMapper<ToDo, ToDoViewModel>();
+			var models = mapper.MapMultiple(entities);
 			return View(models);
 		}
 
-        public IRepository<ToDo> ToDoRepo { get; private set; }
-	    public IMappingRepository MappingRepository { get; private set; }
+		public IRepository<ToDo> ToDoRepo { get; private set; }
 
-        public ActionResult Update(Guid id)
-        {
-            var entity = ToDoRepo.GetById(id);
-            var mapper = MappingRepository.ResolveMapper<ToDo, ToDoEditViewModel>();
-            var model = mapper.Map(entity);
-            return View(model);
-        }
-    }
+		public IRepository<ToDoCategory> TodoCategoryRepo { get; private set; }
+
+		public IMappingRepository MappingRepository { get; private set; }
+
+		public ActionResult Edit(Guid id)
+		{
+			var entity = ToDoRepo.GetById(id);
+			var mapper = MappingRepository.ResolveMapper<ToDo, ToDoEditViewModel>();
+			var model = mapper.Map(entity);
+			var catList = TodoCategoryRepo.GetAll();
+			var catMapper = MappingRepository.ResolveMapper<ToDoCategory, ToDoCategoryViewModel>();
+		    var catModels = catMapper.MapMultiple(catList);
+		    ViewData["Categories"] = catModels;
+			return View(model);
+		}
+	}
 }

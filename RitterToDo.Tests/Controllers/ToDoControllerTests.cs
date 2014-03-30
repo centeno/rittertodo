@@ -22,6 +22,7 @@ namespace RitterToDo.Tests.Controllers
         {
             return new ToDoController(
                 A.Fake<IRepository<ToDo>>(),
+                A.Fake<IRepository<ToDoCategory>>(),
                 A.Fake<IMappingRepository>());
         }
 
@@ -48,22 +49,38 @@ namespace RitterToDo.Tests.Controllers
         [Test]
         public void Update_GetById_PopulatesView()
         {
+            // * Arrange
+            //   - Preparing data and mocks
             var sut = CreateSUT();
             var fixture = new Fixture();
             var model = fixture.Create<ToDoEditViewModel>();
+            var categories = fixture.CreateMany<ToDoCategory>();
+            var catModels = fixture.CreateMany<ToDoCategoryViewModel>();
             var entity = fixture.Create<ToDo>();
             var id = Guid.NewGuid();
+            var mapperMock = A.Fake<IExtensibleMapper<ToDo, ToDoEditViewModel>>();
+            var categoryMapperMock = A.Fake<IExtensibleMapper<ToDoCategory, ToDoCategoryViewModel>>();
+            //   - Setting up expectations
+            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDo, ToDoEditViewModel>()).Returns(mapperMock);
+            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDoCategory, ToDoCategoryViewModel>()).Returns(categoryMapperMock);
             A.CallTo(() => sut.ToDoRepo.GetById(id))
                 .Returns(entity);
-            var mapperMock = A.Fake<IExtensibleMapper<ToDo, ToDoEditViewModel>>();
-            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDo, ToDoEditViewModel>()).Returns(mapperMock);
             A.CallTo(() => mapperMock.Map(entity))
                 .Returns(model);
+            A.CallTo(() => sut.TodoCategoryRepo.GetAll())
+                .Returns(categories);
+            A.CallTo(() => categoryMapperMock.MapMultiple(categories)).Returns(catModels);
 
-            var result = sut.Update(id);
+            // * Act
+            var result = sut.Edit(id);
 
+            // * Assert
+            //   - SUT should return a ViewModelResult
             var vr = result.ShouldBeViewResult();
+            //   - SUT should return an entity object mapped into a ViewModel
             vr.Model.ShouldBeSameAs(model);
+            //   - SUT should populate the ViewData attribute with category data
+            vr.ViewData["Categories"].ShouldBeSameAs(catModels);
         }
     }
 }
