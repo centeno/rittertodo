@@ -75,8 +75,8 @@ namespace RitterToDo.Migrations
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.RoleId)
-                .Index(t => t.UserId);
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.ToDo",
@@ -89,11 +89,11 @@ namespace RitterToDo.Migrations
                         Starred = c.Boolean(nullable: false),
                         Done = c.Boolean(nullable: false),
                         ToDoCategoryId = c.Guid(nullable: false),
-                        OwnerId = c.String(maxLength: 128),
+                        OwnerId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.ToDoId)
                 .ForeignKey("dbo.ToDoCategory", t => t.ToDoCategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.OwnerId)
+                .ForeignKey("dbo.AspNetUsers", t => t.OwnerId, cascadeDelete: true)
                 .Index(t => t.ToDoCategoryId)
                 .Index(t => t.OwnerId);
             
@@ -110,11 +110,11 @@ namespace RitterToDo.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.ToDo", new[] { "OwnerId" });
             DropIndex("dbo.ToDo", new[] { "ToDoCategoryId" });
-            DropIndex("dbo.ToDoCategory", new[] { "OwnerId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "User_Id" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "User_Id" });
+            DropIndex("dbo.ToDoCategory", new[] { "OwnerId" });
             DropTable("dbo.ToDo");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
