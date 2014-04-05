@@ -45,9 +45,17 @@ namespace RitterToDo.Controllers
 			var model = mapper.Map(entity);
 			var catList = TodoCategoryRepo.GetAll();
 			var catMapper = MappingRepository.ResolveMapper<ToDoCategory, ToDoCategoryViewModel>();
-		    var catModels = catMapper.MapMultiple(catList);
-		    ViewData["Categories"] = catModels;
+			var catModels = catMapper.MapMultiple(catList);
+			ViewData["Categories"] = catModels;
 			return View(model);
+		}
+		[HttpPost]
+		public ActionResult Edit(ToDoEditViewModel item)
+		{
+			var mapper = MappingRepository.ResolveMapper<ToDoEditViewModel, ToDo>();
+			var entity = mapper.Map(item);
+			ToDoRepo.Update(entity);
+			return RedirectToAction("Index", "Todo");
 		}
 	}
 }

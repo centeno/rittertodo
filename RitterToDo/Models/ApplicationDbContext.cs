@@ -46,7 +46,9 @@ namespace RitterToDo.Models
 
         public void Update<T>(T entity) where T : class, IEntity
         {
-            throw new NotImplementedException();
+            Set<T>().Add(entity);
+            Entry(entity).State = EntityState.Modified;
+            SaveChanges();
         }
 
         public IEnumerable<T> GetEntitySet<T>(System.Linq.Expressions.Expression<Func<T, bool>> expr) where T : class, IEntity

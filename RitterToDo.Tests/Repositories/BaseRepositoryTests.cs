@@ -57,5 +57,16 @@ namespace RitterToDo.Tests.Repositories
 
             result.ShouldBeSameAs(entity);
         }
+
+        [Test]
+        public void Update_DefaultCase_RedirectsToDbContext()
+        {
+            var sut = CreateSUT();
+            var entity = new Fixture().Create<T>();
+
+            sut.Update(entity);
+
+            A.CallTo(() => sut.DbContext.Update(entity)).MustHaveHappened();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using System.Web.Mvc;
+using FakeItEasy;
 using Moo;
 using NUnit.Framework;
 using RitterToDo.Controllers;
@@ -81,6 +82,25 @@ namespace RitterToDo.Tests.Controllers
             vr.Model.ShouldBeSameAs(model);
             //   - SUT should populate the ViewData attribute with category data
             vr.ViewData["Categories"].ShouldBeSameAs(catModels);
+        }
+
+        [Test]
+        public void Update_PostViewModel_SendToRepo()
+        {
+            var sut = CreateSUT();
+            var fixture = new Fixture();
+            var model = fixture.Create<ToDoEditViewModel>();
+            var entity = fixture.Create<ToDo>();
+            var mapperMock = A.Fake<IExtensibleMapper<ToDoEditViewModel, ToDo>>();
+
+            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDoEditViewModel, ToDo>())
+                .Returns(mapperMock);
+            A.CallTo(() => mapperMock.Map(model)).Returns(entity);
+
+            var result = sut.Edit(model);
+
+            A.CallTo(() => sut.ToDoRepo.Update(entity)).MustHaveHappened();
+            result.ShouldBeType<RedirectToRouteResult>();
         }
     }
 }

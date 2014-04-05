@@ -19,6 +19,7 @@ namespace RitterToDo.Models
         [StringLength(400)]
         public string Description { get; set; }
 
+        [DataType(DataType.Date)] 
         public DateTime? DueDate { get; set; }
 
         public bool Starred { get; set; }
@@ -27,13 +28,13 @@ namespace RitterToDo.Models
 
         public ToDoCategory Category { get; set; }
 
-        public ApplicationUser Owner { get; set; }
-
         [ForeignKey("Category")]
         public Guid ToDoCategoryId { get; set; }
 
         [ForeignKey("Owner")]
         public string OwnerId { get; set; }
+
+        public ApplicationUser Owner { get; set; }
     }
 
     public class ToDoViewModel
@@ -49,6 +50,7 @@ namespace RitterToDo.Models
         public bool Starred { get; set; }
 
         public string CategoryName { get; set; }
+
         public bool Done { get; set; }
     }
 
@@ -60,12 +62,16 @@ namespace RitterToDo.Models
 
         public string Description { get; set; }
 
+        //[DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? DueDate { get; set; }
 
         public bool Starred { get; set; }
 
-        public Guid CategoryId { get; set; }
+        public Guid ToDoCategoryId { get; set; }
 
         public bool Done { get; set; }
+
+        public string OwnerId { get; set; }
     }
 }

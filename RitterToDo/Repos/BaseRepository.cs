@@ -36,5 +36,10 @@ namespace RitterToDo.Repos
         {
             return DbContext.GetById<T>(id);
         }
+
+        public void Update(T entity)
+        {
+            DbContext.Update(entity);
+        }
     }
 }
