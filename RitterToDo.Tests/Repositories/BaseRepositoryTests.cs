@@ -15,8 +15,9 @@ using System.Threading.Tasks;
 
 namespace RitterToDo.Tests.Repositories
 {
-    [TestFixture(TypeArgs=new [] { typeof(ToDo) })]
-    public class BaseRepositoryTest<T> where T : class, IOwnedEntity
+    [TestFixture(TypeArgs = new[] { typeof(ToDo) })]
+    [TestFixture(TypeArgs = new[] { typeof(ToDoCategory) })]
+    public class BaseRepositoryTests<T> where T : class, IOwnedEntity
     {
         private BaseRepository<T> CreateSUT()
         {
@@ -41,6 +42,31 @@ namespace RitterToDo.Tests.Repositories
 
             var result = sut.GetAll();
             CollectionAssert.AreEquivalent(result, filteredData);
+        }
+
+        [Test]
+        public void GetById_DefaultCase_FetchesFromDbContext()
+        {
+            var sut = CreateSUT();
+            var id = Guid.NewGuid();
+            var fixture = new Fixture();
+            var entity = fixture.Create<T>();
+            A.CallTo(() => sut.DbContext.GetById<T>(id)).Returns(entity);
+
+            var result = sut.GetById(id);
+
+            result.ShouldBeSameAs(entity);
+        }
+
+        [Test]
+        public void Update_DefaultCase_RedirectsToDbContext()
+        {
+            var sut = CreateSUT();
+            var entity = new Fixture().Create<T>();
+
+            sut.Update(entity);
+
+            A.CallTo(() => sut.DbContext.Update(entity)).MustHaveHappened();
         }
     }
 }

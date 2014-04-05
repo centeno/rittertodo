@@ -31,26 +31,6 @@ namespace RitterToDo.Migrations
             var generator = new DummyDataGenerator();
             context.ToDos.AddRange(generator.CreateDummyToDos(user));
             context.SaveChanges();
-            /*
-            string test = "test";
-
-            //Create Role Test and User Test
-            RoleManager.Create(new IdentityRole(test));
-            UserManager.Create(new ApplicationUser() { UserName = test });
-
-            //Create Role Admin if it does not exist
-            if (!RoleManager.RoleExists(name))
-            {
-                var roleresult = RoleManager.Create(new IdentityRole(name));
-            }
-
-
-            //Add User Admin to Role Admin
-            if (adminresult.Succeeded)
-            {
-                var result = UserManager.AddToRole(user.Id, name);
-            }
-             */
 
             base.Seed(context);
         }

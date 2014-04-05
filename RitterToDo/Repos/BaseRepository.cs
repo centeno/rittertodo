@@ -12,15 +12,15 @@ namespace RitterToDo.Repos
     {
         public BaseRepository(IIdentityHelper idHelper, IApplicationDbContext dbContext)
         {
-            this.IdHelper = idHelper;
-            this.DbContext = dbContext;
+            IdHelper = idHelper;
+            DbContext = dbContext;
         }
 
         public virtual IEnumerable<T> GetAll()
         {
             var userId = IdHelper.GetUserId();
 
-            var q = from t in this.DbContext.GetEntitySet<T>()
+            var q = from t in DbContext.GetEntitySet<T>()
                     where t.OwnerId == userId
                     select t;
 
@@ -30,5 +30,16 @@ namespace RitterToDo.Repos
         public IIdentityHelper IdHelper { get; private set; }
 
         public IApplicationDbContext DbContext { get; private set; }
+
+
+        public T GetById(Guid id)
+        {
+            return DbContext.GetById<T>(id);
+        }
+
+        public void Update(T entity)
+        {
+            DbContext.Update(entity);
+        }
     }
 }

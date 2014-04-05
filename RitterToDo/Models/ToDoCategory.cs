@@ -21,4 +21,11 @@ namespace RitterToDo.Models
         [ForeignKey("Owner")]
         public string OwnerId { get; set; }
     }
+
+    public class ToDoCategoryViewModel
+    {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+    }
 }

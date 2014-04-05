@@ -44,29 +44,21 @@ namespace RitterToDo.App_Start
 
         private static void InitializeContainer(Container container)
         {
-            container.Register<UserManager<ApplicationUser>>(
+            container.Register(
                 () => (new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()))));
 
-            container.RegisterPerWebRequest<IPrincipal>(
+            container.RegisterPerWebRequest(
                 () => Thread.CurrentPrincipal);
 
             container.Register<IIdentityHelper, IdentityHelper>();
 
             container.Register<IRepository<ToDo>, ToDoRepository>();
+
+            container.RegisterOpenGeneric(typeof(IRepository<>), typeof(BaseRepository<>));
             
             container.Register<IApplicationDbContext, ApplicationDbContext>();
 
-            container.ResolveUnregisteredType += (s, e) =>
-            {
-                Type type = e.UnregisteredServiceType;
-                if (type.IsGenericType &&
-                    type.GetGenericTypeDefinition() == typeof(IMapper<,>))
-                {
-                    var args = type.GetGenericArguments();
-
-                    e.Register(() => MappingRepository.Default.ResolveMapper(args[0], args[1]));
-                }
-            };
+            container.RegisterSingle(MappingRepository.Default);
         }
     }
 
