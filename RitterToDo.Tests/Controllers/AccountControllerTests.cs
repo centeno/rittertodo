@@ -19,7 +19,7 @@ using System.Web.Mvc;
 namespace RitterToDo.Tests.Controllers
 {
     [TestFixture]
-    public class AccountControllerTest
+    public class AccountControllerTests
     {
         private AccountController CreateSUT()
         {

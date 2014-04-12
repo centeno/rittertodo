@@ -26,12 +26,12 @@ namespace RitterToDo.Models
 
         public IDbSet<T> GetEntitySet<T>() where T : class
         {
-            return this.Set<T>();
+            return Set<T>();
         }
 
-        public T GetById<T>(int id) where T : class, IEntity
+        public T GetById<T>(Guid id) where T : class, IEntity
         {
-            throw new NotImplementedException();
+            return Set<T>().Find(id);
         }
 
         public void Delete<T>(T entity) where T : class, IEntity
@@ -46,7 +46,9 @@ namespace RitterToDo.Models
 
         public void Update<T>(T entity) where T : class, IEntity
         {
-            throw new NotImplementedException();
+            Set<T>().Add(entity);
+            Entry(entity).State = EntityState.Modified;
+            SaveChanges();
         }
 
         public IEnumerable<T> GetEntitySet<T>(System.Linq.Expressions.Expression<Func<T, bool>> expr) where T : class, IEntity

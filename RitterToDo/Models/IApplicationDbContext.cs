@@ -8,7 +8,7 @@ namespace RitterToDo.Models
     {
         IDbSet<T> GetEntitySet<T>() where T : class;
 
-        T GetById<T>(int id) where T : class, IEntity;
+        T GetById<T>(Guid id) where T : class, IEntity;
 
         void Delete<T>(T entity) where T : class, IEntity;
 

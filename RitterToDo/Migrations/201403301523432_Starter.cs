@@ -89,11 +89,11 @@ namespace RitterToDo.Migrations
                         Starred = c.Boolean(nullable: false),
                         Done = c.Boolean(nullable: false),
                         ToDoCategoryId = c.Guid(nullable: false),
-                        OwnerId = c.String(nullable: false, maxLength: 128),
+                        OwnerId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.ToDoId)
                 .ForeignKey("dbo.ToDoCategory", t => t.ToDoCategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.OwnerId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.OwnerId)
                 .Index(t => t.ToDoCategoryId)
                 .Index(t => t.OwnerId);
             
