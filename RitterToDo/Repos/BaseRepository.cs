@@ -32,7 +32,7 @@ namespace RitterToDo.Repos
         public IApplicationDbContext DbContext { get; private set; }
 
 
-        public T GetById(Guid id)
+        public virtual T GetById(Guid id)
         {
             return DbContext.GetById<T>(id);
         }

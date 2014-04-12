@@ -1,4 +1,5 @@
-﻿using RitterToDo.Core;
+﻿using Moo.Extenders;
+using RitterToDo.Core;
 using RitterToDo.Models;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,11 @@ namespace RitterToDo.Repos
         {
             return base.GetAll().AsQueryable().Include(p => p.Category);
         }
+
+        public override ToDo GetById(Guid id)
+        {
+            return base.GetAll().AsQueryable().Include(p => p.Category).FirstOrDefault(p => p.Id == id);
+        }
+
     }
 }

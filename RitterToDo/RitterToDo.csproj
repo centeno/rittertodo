@@ -356,6 +356,7 @@
     <Content Include="Views\ToDo\Index.cshtml" />
     <Content Include="Views\ToDo\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Date.cshtml" />
+    <Content Include="Views\ToDo\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

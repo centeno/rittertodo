@@ -49,7 +49,8 @@ namespace RitterToDo.Controllers
 			ViewData["Categories"] = catModels;
 			return View(model);
 		}
-		[HttpPost]
+		
+        [HttpPost]
 		public ActionResult Edit(ToDoEditViewModel item)
 		{
 			var mapper = MappingRepository.ResolveMapper<ToDoEditViewModel, ToDo>();
@@ -57,5 +58,13 @@ namespace RitterToDo.Controllers
 			ToDoRepo.Update(entity);
 			return RedirectToAction("Index", "Todo");
 		}
-	}
+
+        public ActionResult Details(Guid id)
+        {
+            var entity = ToDoRepo.GetById(id);
+            var mapper = MappingRepository.ResolveMapper<ToDo, ToDoViewModel>();
+            var model = mapper.Map(entity);
+            return View(model);
+        }
+    }
 }

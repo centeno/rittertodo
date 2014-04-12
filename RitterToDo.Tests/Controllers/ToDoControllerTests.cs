@@ -48,7 +48,7 @@ namespace RitterToDo.Tests.Controllers
         }
 
         [Test]
-        public void Update_GetById_PopulatesView()
+        public void Edit_GetById_PopulatesView()
         {
             // * Arrange
             //   - Preparing data and mocks
@@ -85,7 +85,7 @@ namespace RitterToDo.Tests.Controllers
         }
 
         [Test]
-        public void Update_PostViewModel_SendToRepo()
+        public void Edit_PostViewModel_SendToRepo()
         {
             var sut = CreateSUT();
             var fixture = new Fixture();
@@ -101,6 +101,26 @@ namespace RitterToDo.Tests.Controllers
 
             A.CallTo(() => sut.ToDoRepo.Update(entity)).MustHaveHappened();
             result.ShouldBeType<RedirectToRouteResult>();
+        }
+
+        [Test]
+        public void Details_GetById_ShowsToDoDetails()
+        {
+            var sut = CreateSUT();
+            var fixture = new Fixture();
+            var model = fixture.Create<ToDoViewModel>();
+            var entity = fixture.Create<ToDo>();
+            var id = Guid.NewGuid();
+            var mapperMock = A.Fake<IExtensibleMapper<ToDo, ToDoViewModel>>();
+            
+            A.CallTo(() => sut.ToDoRepo.GetById(id)).Returns(entity);
+            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDo, ToDoViewModel>()).Returns(mapperMock);
+            A.CallTo(() => mapperMock.Map(entity)).Returns(model);
+
+            var result = sut.Details(id);
+
+            var vr = result.ShouldBeViewResult();
+            vr.Model.ShouldBeSameAs(model);
         }
     }
 }
