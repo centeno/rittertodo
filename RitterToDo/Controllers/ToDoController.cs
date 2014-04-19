@@ -1,12 +1,6 @@
-﻿using Moo.Extenders;
-using RitterToDo.Repos;
+﻿using RitterToDo.Repos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Security.Principal;
 using RitterToDo.Models;
 using Moo;
 
@@ -49,6 +43,7 @@ namespace RitterToDo.Controllers
 			ViewData["Categories"] = catModels;
 			return View(model);
 		}
+
 		[HttpPost]
 		public ActionResult Edit(ToDoEditViewModel item)
 		{

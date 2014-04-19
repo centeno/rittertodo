@@ -218,6 +218,7 @@
     <Compile Include="Core\DummyDataGenerator.cs" />
     <Compile Include="Core\IdentityHelper.cs" />
     <Compile Include="Core\IIdentityHelper.cs" />
+    <Compile Include="Core\LookupHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
