@@ -1,4 +1,5 @@
-﻿using RitterToDo.Repos;
+﻿using RitterToDo.Core;
+using RitterToDo.Repos;
 using System;
 using System.Web.Mvc;
 using RitterToDo.Models;
@@ -10,11 +11,11 @@ namespace RitterToDo.Controllers
 	{
 		public ToDoController(
 			IRepository<ToDo> todoRepo,
-			IRepository<ToDoCategory> todoCategoryRepo,
+			ILookupHelper<ToDoCategory, ToDoCategoryViewModel> categoryHelper,
 			IMappingRepository mappingRepository)
 		{
 			ToDoRepo = todoRepo;
-			TodoCategoryRepo = todoCategoryRepo;
+			CategoryHelper = categoryHelper;
 			MappingRepository = mappingRepository;
 		}
 
@@ -27,20 +28,16 @@ namespace RitterToDo.Controllers
 		}
 
 		public IRepository<ToDo> ToDoRepo { get; private set; }
-
-		public IRepository<ToDoCategory> TodoCategoryRepo { get; private set; }
+		
+		public ILookupHelper<ToDoCategory, ToDoCategoryViewModel> CategoryHelper { get; private set; }
 
 		public IMappingRepository MappingRepository { get; private set; }
 
 		public ActionResult Edit(Guid id)
 		{
-			var entity = ToDoRepo.GetById(id);
 			var mapper = MappingRepository.ResolveMapper<ToDo, ToDoEditViewModel>();
-			var model = mapper.Map(entity);
-			var catList = TodoCategoryRepo.GetAll();
-			var catMapper = MappingRepository.ResolveMapper<ToDoCategory, ToDoCategoryViewModel>();
-			var catModels = catMapper.MapMultiple(catList);
-			ViewData["Categories"] = catModels;
+			var model = mapper.Map(ToDoRepo.GetById(id));
+			ViewData["Categories"] = CategoryHelper.GetAll();
 			return View(model);
 		}
 

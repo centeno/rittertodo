@@ -5,7 +5,7 @@ using RitterToDo.Repos;
 
 namespace RitterToDo.Core
 {
-    public class LookupHelper<TEntity, TModel> where TEntity : class, IOwnedEntity
+    public class LookupHelper<TEntity, TModel> : ILookupHelper<TEntity, TModel> where TEntity : class, IOwnedEntity
     {
         public IRepository<TEntity> Repo { get; private set; }
         public IMappingRepository MappingRepo { get; private set; }
