@@ -3,13 +3,10 @@ using FakeItEasy;
 using Moo;
 using NUnit.Framework;
 using RitterToDo.Controllers;
+using RitterToDo.Core;
 using RitterToDo.Models;
 using RitterToDo.Repos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RitterToDo.Tests.TestHelpers;
 using Ploeh.AutoFixture;
 using Should;
@@ -23,7 +20,7 @@ namespace RitterToDo.Tests.Controllers
         {
             return new ToDoController(
                 A.Fake<IRepository<ToDo>>(),
-                A.Fake<IRepository<ToDoCategory>>(),
+                A.Fake<ILookupHelper<ToDoCategory, ToDoCategoryViewModel>>(),
                 A.Fake<IMappingRepository>());
         }
 
@@ -55,22 +52,17 @@ namespace RitterToDo.Tests.Controllers
             var sut = CreateSUT();
             var fixture = new Fixture();
             var model = fixture.Create<ToDoEditViewModel>();
-            var categories = fixture.CreateMany<ToDoCategory>();
             var catModels = fixture.CreateMany<ToDoCategoryViewModel>();
             var entity = fixture.Create<ToDo>();
             var id = Guid.NewGuid();
             var mapperMock = A.Fake<IExtensibleMapper<ToDo, ToDoEditViewModel>>();
-            var categoryMapperMock = A.Fake<IExtensibleMapper<ToDoCategory, ToDoCategoryViewModel>>();
             //   - Setting up expectations
             A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDo, ToDoEditViewModel>()).Returns(mapperMock);
-            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDoCategory, ToDoCategoryViewModel>()).Returns(categoryMapperMock);
             A.CallTo(() => sut.ToDoRepo.GetById(id))
                 .Returns(entity);
             A.CallTo(() => mapperMock.Map(entity))
                 .Returns(model);
-            A.CallTo(() => sut.TodoCategoryRepo.GetAll())
-                .Returns(categories);
-            A.CallTo(() => categoryMapperMock.MapMultiple(categories)).Returns(catModels);
+            A.CallTo(() => sut.CategoryHelper.GetAll()).Returns(catModels);
 
             // * Act
             var result = sut.Edit(id);

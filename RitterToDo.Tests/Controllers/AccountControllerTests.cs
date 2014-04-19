@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoFakeItEasy;
 using RitterToDo.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Should;
 using RitterToDo.Tests.TestHelpers;

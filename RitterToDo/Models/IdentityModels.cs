@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
 
 namespace RitterToDo.Models
 {
