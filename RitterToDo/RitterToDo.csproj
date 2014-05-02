@@ -223,9 +223,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403301523432_Starter.cs" />
-    <Compile Include="Migrations\201403301523432_Starter.Designer.cs">
-      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
+    <Compile Include="Migrations\Starter.cs" />
+    <Compile Include="Migrations\Starter.Designer.cs">
+      <DependentUpon>Starter.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -243,6 +243,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\RitterToDo.mdf" />
+    <Content Include="App_Data\RitterToDo_log.ldf">
+      <DependentUpon>RitterToDo.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -356,17 +360,15 @@
     <Content Include="Views\Shared\EditorTemplates\_Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201403301523432_Starter.resx">
-      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\Starter.resx">
+      <DependentUpon>Starter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

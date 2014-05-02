@@ -10,6 +10,8 @@ using System;
 using RitterToDo.Tests.TestHelpers;
 using Ploeh.AutoFixture;
 using Should;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace RitterToDo.Tests.Controllers
 {
@@ -22,6 +24,70 @@ namespace RitterToDo.Tests.Controllers
                 A.Fake<IRepository<ToDo>>(),
                 A.Fake<ILookupHelper<ToDoCategory, ToDoCategoryViewModel>>(),
                 A.Fake<IMappingRepository>());
+        }
+
+        [TestCaseSource("GetStarredCases")]
+        public void GetStarred_DefaultCase_ReturnsStarredToDos(IEnumerable<ToDo> entities)
+        {
+            var sut = CreateSUT();
+            var mapperMock = A.Fake<IExtensibleMapper<ToDo, ToDoViewModel>>();
+            A.CallTo(() => sut.ToDoRepo.GetAll()).Returns(entities);
+            A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDo, ToDoViewModel>()).Returns(mapperMock);
+            A.CallTo(() => mapperMock.MapMultiple(
+                A<IEnumerable<ToDo>>.That.Matches(
+                    list => (!list.Any(i => i.Starred)) && (list.Count() == entities.Count(e => e.Starred))
+                )))
+                .Returns(new ToDoViewModel[0]);
+
+            var result = sut.GetStarred();
+
+            var vr = result.ShouldBeViewResult();
+
+            vr.Model.ShouldNotBeNull();
+        }
+
+        public IEnumerable<IEnumerable<ToDo>> GetStarredCases()
+        {
+            return new[]
+            {
+                new[]
+                {
+                    new ToDo() { Starred = true }, 
+                    new ToDo() { Starred = false },
+                    new ToDo() { Starred = true }, 
+                    new ToDo() { Starred = false },
+                }
+                ,
+                new[]
+                {
+                    new ToDo() { Starred = true }, 
+                    new ToDo() { Starred = false },
+                }
+                ,
+                new[]
+                {
+                    new ToDo() { Starred = true }, 
+                    new ToDo() { Starred = true },
+                }
+                ,
+                new[]
+                {
+                    new ToDo() { Starred = false }, 
+                    new ToDo() { Starred = false },
+                }
+                ,
+                new[]
+                {
+                    new ToDo() { Starred = false }, 
+                }
+                ,
+                new[]
+                {
+                    new ToDo() { Starred = true }, 
+                }
+                ,
+                new ToDo[] {},
+            };
         }
 
         [Test]
