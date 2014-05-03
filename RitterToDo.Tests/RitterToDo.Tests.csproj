@@ -141,6 +141,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepositoryTests.cs" />
     <Compile Include="TestHelpers\ActionResultExtensions.cs" />
+    <Compile Include="TestHelpers\CollectionLambdaAssert.cs" />
     <Compile Include="TestHelpers\InMemoryDbSet.cs" />
   </ItemGroup>
   <ItemGroup>

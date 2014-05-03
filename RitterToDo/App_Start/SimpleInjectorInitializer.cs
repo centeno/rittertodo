@@ -46,6 +46,8 @@ namespace RitterToDo.App_Start
             container.Register<IRepository<ToDo>, ToDoRepository>();
 
             container.RegisterOpenGeneric(typeof(IRepository<>), typeof(BaseRepository<>));
+
+            container.RegisterOpenGeneric(typeof(ILookupHelper<,>), typeof(LookupHelper<,>));
             
             container.Register<IApplicationDbContext, ApplicationDbContext>();
 
