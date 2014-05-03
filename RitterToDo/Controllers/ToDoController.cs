@@ -1,4 +1,5 @@
-﻿using RitterToDo.Core;
+﻿using System.Linq;
+using RitterToDo.Core;
 using RitterToDo.Repos;
 using System;
 using System.Web.Mvc;
@@ -49,5 +50,14 @@ namespace RitterToDo.Controllers
 			ToDoRepo.Update(entity);
 			return RedirectToAction("Index", "Todo");
 		}
+
+		public ActionResult GetStarred()
+		{
+			var entities = ToDoRepo.GetAll().Where(x => x.Starred);
+			var mapper = MappingRepository.ResolveMapper<ToDo, ToDoViewModel>();
+			var models = mapper.MapMultiple(entities);
+			return View("Index", models);
+		}
+
 	}
 }

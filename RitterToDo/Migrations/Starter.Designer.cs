@@ -12,7 +12,7 @@ namespace RitterToDo.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201403301523432_Starter"; }
+            get { return "Starter"; }
         }
         
         string IMigrationMetadata.Source
