@@ -241,6 +241,7 @@
     <Compile Include="Repos\IRepository.cs" />
     <Compile Include="Repos\ToDoRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Api\ToDoController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datepicker.css" />
