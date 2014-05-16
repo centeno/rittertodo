@@ -39,5 +39,10 @@ namespace RitterToDo.Repos
         {
             DbContext.Update(entity);
         }
+
+        public virtual IEnumerable<T> GetByOwner(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
