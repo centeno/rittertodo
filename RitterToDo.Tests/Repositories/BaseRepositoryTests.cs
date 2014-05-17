@@ -31,12 +31,30 @@ namespace RitterToDo.Tests.Repositories
             var rawData = fixture.CreateMany<T>(10).ToArray();
             var filteredData = new T[] { rawData[2], rawData[6], rawData[7] };
             foreach (var d in filteredData) { d.OwnerId = id; }
-            var fakeDbSet = new InMemoryDbSet<T>(rawData);           
+            var fakeDbSet = new InMemoryDbSet<T>(rawData);
 
             A.CallTo(() => sut.IdHelper.GetUserId()).Returns(id);
             A.CallTo(() => sut.DbContext.GetEntitySet<T>()).Returns(fakeDbSet);
 
             var result = sut.GetAll();
+            CollectionAssert.AreEquivalent(result, filteredData);
+        }
+
+        [Test]
+        public void GetByOwner_DefaultCase_FetchesFromDbContext()
+        {
+            var sut = CreateSUT();
+            var id = Guid.NewGuid().ToString();
+            var fixture = new Fixture();
+            var rawData = fixture.CreateMany<T>(10).ToArray();
+            var filteredData = new T[] { rawData[2], rawData[6], rawData[7] };
+            foreach (var d in filteredData) { d.OwnerId = id; }
+            var fakeDbSet = new InMemoryDbSet<T>(rawData);
+
+            A.CallTo(() => sut.DbContext.GetEntitySet<T>()).Returns(fakeDbSet);
+
+            var result = sut.GetByOwner(id);
+
             CollectionAssert.AreEquivalent(result, filteredData);
         }
 

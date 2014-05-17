@@ -18,11 +18,7 @@ namespace RitterToDo.Repos
         {
             var userId = IdHelper.GetUserId();
 
-            var q = from t in DbContext.GetEntitySet<T>()
-                    where t.OwnerId == userId
-                    select t;
-
-            return q;
+            return GetByOwner(userId);
         }
 
         public IIdentityHelper IdHelper { get; private set; }
@@ -38,6 +34,15 @@ namespace RitterToDo.Repos
         public void Update(T entity)
         {
             DbContext.Update(entity);
+        }
+
+        public virtual IEnumerable<T> GetByOwner(string userId)
+        {
+            var q = from t in DbContext.GetEntitySet<T>()
+                    where t.OwnerId == userId
+                    select t;
+
+            return q;
         }
     }
 }

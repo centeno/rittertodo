@@ -35,14 +35,14 @@ namespace RitterToDo.Tests.Controllers
             A.CallTo(() => sut.MappingRepository.ResolveMapper<ToDo, ToDoViewModel>()).Returns(mapperMock);
             A.CallTo(() => mapperMock.MapMultiple(
                 A<IEnumerable<ToDo>>.That.Matches(
-                    list => (!list.Any(i => i.Starred)) && (list.Count() == entities.Count(e => e.Starred))
+                    list => (list.All(i => i.Starred)) 
+                        && (list.Count() == entities.Count(e => e.Starred))
                 )))
                 .Returns(new ToDoViewModel[0]);
 
             var result = sut.GetStarred();
 
             var vr = result.ShouldBeViewResult();
-
             vr.Model.ShouldNotBeNull();
         }
 
@@ -55,6 +55,13 @@ namespace RitterToDo.Tests.Controllers
                     new ToDo() { Starred = true }, 
                     new ToDo() { Starred = false },
                     new ToDo() { Starred = true }, 
+                    new ToDo() { Starred = false },
+                }
+                ,
+                new[]
+                {
+                    new ToDo() { Starred = true }, 
+                    new ToDo() { Starred = false },
                     new ToDo() { Starred = false },
                 }
                 ,
