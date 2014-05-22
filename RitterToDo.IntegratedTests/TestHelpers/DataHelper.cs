@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moo;
+using Moo.Extenders;
+using Machine.Specifications;
 
 namespace RitterToDo.IntegratedTests.TestHelpers
 {
@@ -18,11 +21,17 @@ namespace RitterToDo.IntegratedTests.TestHelpers
 
         public static IEnumerable<ToDoCategory> DummyCategories { get; private set; }
 
+        public static IEnumerable<ToDoViewModel> DummyToDoViewModels { get; private set; }
+
+        public static IEnumerable<ToDoCategoryViewModel> DummyCategoryViewModels { get; private set; }
+
         static DataHelper()
         {
             dummyUsr = new ApplicationUser() { Id = DefaultUserId };
             DummyToDos = new DummyDataGenerator().CreateDummyToDos(dummyUsr);
             DummyCategories = DummyToDos.Select(d => d.Category).Distinct();
+            DummyToDoViewModels = DummyToDos.MapAll<ToDo, ToDoViewModel>();
+            DummyCategoryViewModels = DummyCategories.MapAll<ToDoCategory, ToDoCategoryViewModel>();
         }
     }
 }

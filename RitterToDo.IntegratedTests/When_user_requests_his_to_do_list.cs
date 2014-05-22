@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using FluentAssertions;
 
 namespace RitterToDo.IntegratedTests
 {
@@ -29,10 +30,23 @@ namespace RitterToDo.IntegratedTests
 
         It should_be_a_view_result = () => Result.ShouldBeOfExactType<ViewResult>();
 
-        It should_return_all_data = () => 
+        It should_return_a_list_of_to_dos = () => 
+            ((ViewResult)Result)
+            .Model
+            .ShouldBeAssignableTo<IEnumerable<ToDoViewModel>>();
+
+        It should_return_all_data = () =>
             {
-                var viewData =  ((ViewResult) Result).ViewData;
-                viewData.ShouldBeOfExactType<IEnumerable<ToDoViewModel>>();
-            }
+                var models = (IEnumerable<ToDoViewModel>)((ViewResult)Result).Model;
+
+                models
+                    .ShouldAllBeEquivalentTo(
+                        DataHelper.DummyToDoViewModels
+                        , opt => opt
+                            .Excluding(e => e.Id)
+                            .Excluding(e => e.DueDate)
+                    );
+
+            };
     }
 }

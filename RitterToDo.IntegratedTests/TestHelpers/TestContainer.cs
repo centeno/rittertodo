@@ -1,4 +1,5 @@
-﻿using RitterToDo.Core;
+﻿using Moo;
+using RitterToDo.Core;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,10 @@ namespace RitterToDo.IntegratedTests.TestHelpers
         static TestContainer()
         {
             innerContainer = new Container();
+            innerContainer.Options.AllowOverridingRegistrations = true;
             RitterToDo.App_Start.SimpleInjectorInitializer.InitializeContainer(innerContainer);
             innerContainer.Register<IIdentityHelper, TestIdentityHelper>();
+            RitterToDo.App_Start.MappingConfig.RegisterMappings();
         }
 
         private static readonly Container innerContainer;
