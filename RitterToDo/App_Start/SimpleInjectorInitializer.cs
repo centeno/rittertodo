@@ -33,7 +33,7 @@ namespace RitterToDo.App_Start
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
 
-        private static void InitializeContainer(Container container)
+        public static void InitializeContainer(Container container)
         {
             container.Register(
                 () => (new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()))));
