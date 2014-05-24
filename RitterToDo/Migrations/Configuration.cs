@@ -23,6 +23,7 @@ namespace RitterToDo.Migrations
 
             var user = new ApplicationUser();
             user.UserName = name;
+            user.Id = "320840b0-78d6-4aed-9912-65c1cd180990";
             var adminresult = UserManager.Create(user, password);
 
             var generator = new DummyDataGenerator();

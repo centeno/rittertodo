@@ -223,6 +223,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405220250251_v2.cs" />
+    <Compile Include="Migrations\201405220250251_v2.Designer.cs">
+      <DependentUpon>201405220250251_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Starter.cs" />
     <Compile Include="Migrations\Starter.Designer.cs">
       <DependentUpon>Starter.cs</DependentUpon>
@@ -357,6 +361,9 @@
     <Content Include="Views\Shared\EditorTemplates\_Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201405220250251_v2.resx">
+      <DependentUpon>201405220250251_v2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Starter.resx">
       <DependentUpon>Starter.cs</DependentUpon>
     </EmbeddedResource>
