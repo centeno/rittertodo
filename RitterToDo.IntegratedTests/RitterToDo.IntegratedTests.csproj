@@ -154,17 +154,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\RitterToDo\App_Data\RitterToDo.mdf">
-      <Link>RitterToDo.mdf</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\RitterToDo\App_Data\RitterToDo_log.ldf">
-      <Link>RitterToDo_log.ldf</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>RitterToDo.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -189,6 +178,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(SolutionDir)RitterToDo\App_Data\RitterToDo.mdf" (copy "$(SolutionDir)RitterToDo\App_Data\RitterToDo.*" "$(TargetDir)")</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

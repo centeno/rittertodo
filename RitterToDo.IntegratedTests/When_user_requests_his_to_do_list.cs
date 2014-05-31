@@ -16,28 +16,27 @@ namespace RitterToDo.IntegratedTests
     [Subject(typeof(ToDoController), "To-do")]
     public class When_user_requests_his_to_do_list
     {
-        private static ToDoController Sut;
+        private static ToDoController _sut;
 
-        private static ActionResult Result;
+        private static ActionResult _result;
 
         Establish context = () =>
             {
-                var ctr = new Container();
-                Sut = TestContainer.GetInstance<ToDoController>();
+                _sut = TestContainer.GetInstance<ToDoController>();
             };
 
-        Because of = () => Result = Sut.Index();
+        Because of = () => _result = _sut.Index();
 
-        It should_be_a_view_result = () => Result.ShouldBeOfExactType<ViewResult>();
+        It should_be_a_view_result = () => _result.ShouldBeOfExactType<ViewResult>();
 
         It should_return_a_list_of_to_dos = () => 
-            ((ViewResult)Result)
+            ((ViewResult)_result)
             .Model
             .ShouldBeAssignableTo<IEnumerable<ToDoViewModel>>();
 
         It should_return_all_data = () =>
             {
-                var models = (IEnumerable<ToDoViewModel>)((ViewResult)Result).Model;
+                var models = (IEnumerable<ToDoViewModel>)((ViewResult)_result).Model;
 
                 models
                     .ShouldAllBeEquivalentTo(
