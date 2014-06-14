@@ -7,23 +7,14 @@ namespace RitterToDo.App_Start
 
     using SimpleInjector;
     using SimpleInjector.Extensions;
-    using SimpleInjector.Integration.Web;
     using SimpleInjector.Integration.Web.Mvc;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using RitterToDo.Models;
-    using Microsoft.Owin.Security;
-    using System.Web;
-    using System.Security.Principal;
     using System.Threading;
     using RitterToDo.Repos;
     using RitterToDo.Core;
     using Moo;
-    using System;
-    using System.Linq.Expressions;
-    using SimpleInjector.Advanced;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public static class SimpleInjectorInitializer
     {
@@ -42,7 +33,7 @@ namespace RitterToDo.App_Start
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
 
-        private static void InitializeContainer(Container container)
+        public static void InitializeContainer(Container container)
         {
             container.Register(
                 () => (new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()))));
@@ -55,6 +46,8 @@ namespace RitterToDo.App_Start
             container.Register<IRepository<ToDo>, ToDoRepository>();
 
             container.RegisterOpenGeneric(typeof(IRepository<>), typeof(BaseRepository<>));
+
+            container.RegisterOpenGeneric(typeof(ILookupHelper<,>), typeof(LookupHelper<,>));
             
             container.Register<IApplicationDbContext, ApplicationDbContext>();
 

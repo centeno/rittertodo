@@ -4,10 +4,7 @@ namespace RitterToDo.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using RitterToDo.Core;
     using RitterToDo.Models;
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -26,6 +23,7 @@ namespace RitterToDo.Migrations
 
             var user = new ApplicationUser();
             user.UserName = name;
+            user.Id = "320840b0-78d6-4aed-9912-65c1cd180990";
             var adminresult = UserManager.Create(user, password);
 
             var generator = new DummyDataGenerator();

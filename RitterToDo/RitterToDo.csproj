@@ -218,12 +218,18 @@
     <Compile Include="Core\DummyDataGenerator.cs" />
     <Compile Include="Core\IdentityHelper.cs" />
     <Compile Include="Core\IIdentityHelper.cs" />
+    <Compile Include="Core\ILookupHelper.cs" />
+    <Compile Include="Core\LookupHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403301523432_Starter.cs" />
-    <Compile Include="Migrations\201403301523432_Starter.Designer.cs">
-      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
+    <Compile Include="Migrations\201405241402222_Starter.cs" />
+    <Compile Include="Migrations\201405241402222_Starter.Designer.cs">
+      <DependentUpon>201405241402222_Starter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405241431089_v1.cs" />
+    <Compile Include="Migrations\201405241431089_v1.Designer.cs">
+      <DependentUpon>201405241431089_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -239,12 +245,10 @@
     <Compile Include="Repos\IRepository.cs" />
     <Compile Include="Repos\ToDoRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Api\ToDoController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\RitterToDo.mdf" />
-    <Content Include="App_Data\RitterToDo_log.ldf">
-      <DependentUpon>RitterToDo.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -358,17 +362,18 @@
     <Content Include="Views\Shared\EditorTemplates\_Date.cshtml" />
     <Content Include="Views\ToDo\Details.cshtml" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201403301523432_Starter.resx">
-      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201405241402222_Starter.resx">
+      <DependentUpon>201405241402222_Starter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405241431089_v1.resx">
+      <DependentUpon>201405241431089_v1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

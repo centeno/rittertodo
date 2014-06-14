@@ -1,5 +1,4 @@
-﻿using System;
-namespace RitterToDo.Core
+﻿namespace RitterToDo.Core
 {
     public interface IIdentityHelper
     {

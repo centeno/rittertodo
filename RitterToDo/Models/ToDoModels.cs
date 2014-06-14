@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace RitterToDo.Models
 {
@@ -28,9 +25,11 @@ namespace RitterToDo.Models
 
         public ToDoCategory Category { get; set; }
 
+        [Required]
         [ForeignKey("Category")]
         public Guid ToDoCategoryId { get; set; }
 
+        [Required]
         [ForeignKey("Owner")]
         public string OwnerId { get; set; }
 
@@ -58,6 +57,7 @@ namespace RitterToDo.Models
     {
         public Guid Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
