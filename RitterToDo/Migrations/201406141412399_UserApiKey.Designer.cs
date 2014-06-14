@@ -7,13 +7,13 @@ namespace RitterToDo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class Starter : IMigrationMetadata
+    public sealed partial class UserApiKey : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Starter));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserApiKey));
         
         string IMigrationMetadata.Id
         {
-            get { return "201405241402222_Starter"; }
+            get { return "201406141412399_UserApiKey"; }
         }
         
         string IMigrationMetadata.Source

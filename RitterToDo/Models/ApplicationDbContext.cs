@@ -8,6 +8,8 @@ namespace RitterToDo.Models
 {
     public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
+        public DbSet<UserApiKey> UserApiKeys { get; set; }
+
         public DbSet<ToDo> ToDos { get; set;}
 
         public DbSet<ToDoCategory> ToDoCategories { get; set; }

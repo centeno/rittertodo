@@ -223,13 +223,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405241402222_Starter.cs" />
-    <Compile Include="Migrations\201405241402222_Starter.Designer.cs">
-      <DependentUpon>201405241402222_Starter.cs</DependentUpon>
+    <Compile Include="Migrations\201403301523432_Starter.cs" />
+    <Compile Include="Migrations\201403301523432_Starter.Designer.cs">
+      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405241431089_v1.cs" />
-    <Compile Include="Migrations\201405241431089_v1.Designer.cs">
-      <DependentUpon>201405241431089_v1.cs</DependentUpon>
+    <Compile Include="Migrations\201405220250251_v2.cs" />
+    <Compile Include="Migrations\201405220250251_v2.Designer.cs">
+      <DependentUpon>201405220250251_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406141412399_UserApiKey.cs" />
+    <Compile Include="Migrations\201406141412399_UserApiKey.Designer.cs">
+      <DependentUpon>201406141412399_UserApiKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -240,6 +244,7 @@
     <Compile Include="Models\IOwnedEntity.cs" />
     <Compile Include="Models\ToDoCategory.cs" />
     <Compile Include="Models\ToDoModels.cs" />
+    <Compile Include="Models\UserApiKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\BaseRepository.cs" />
     <Compile Include="Repos\IRepository.cs" />
@@ -249,6 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\RitterToDo.mdf" />
+    <Content Include="App_Data\RitterToDo_log.ldf">
+      <DependentUpon>RitterToDo.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -367,13 +375,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201405241402222_Starter.resx">
-      <DependentUpon>201405241402222_Starter.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201403301523432_Starter.resx">
+      <DependentUpon>201403301523432_Starter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405241431089_v1.resx">
-      <DependentUpon>201405241431089_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405220250251_v2.resx">
+      <DependentUpon>201405220250251_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406141412399_UserApiKey.resx">
+      <DependentUpon>201406141412399_UserApiKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
